@@ -53,7 +53,7 @@ const AuthenticationController = (app) => {
         const user =  await usersDao.findUserByEmailAddress(email);
 
         if(user) {
-            const match = await bcrypt.compare(password, user.password);
+            const match = await bcrypt.compare(password, user.password)
             let allowSignInVal = true;
             if (match) {
                 const allowSignIn = await privilegeDao.getPrivilegeByUser(user._id)
