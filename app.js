@@ -151,7 +151,8 @@ find()
 app.use(
     cors({
         credentials: true,
-        origin: "http://localhost:3000",
+       // origin: "http://localhost:3000",
+             origin: "https://google-login--phenomenal-granita-444296.netlify.app/",
     })
 );
 app.use(express.json());
