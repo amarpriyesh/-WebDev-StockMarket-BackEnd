@@ -56,7 +56,7 @@ console.log("Listining to web socket server port ", webSocketServerPort)
 
 const wsServer = new WebSocketServer.server({ httpServer: server,port: webSocketServerPort });*/
 
-const PORT =  10000;
+const PORT =  process.env.PORT ;
 const wsServer1 =  WebSocket.Server || WSWebSocketServer;
 const wsServer = new wsServer1({ port: PORT })
 wsServer.on('connection', ws => {
@@ -189,7 +189,7 @@ NewsLikesController(app)
 PrivilegeController(app)
 
 
-app.listen(process.env.PORT || 4000);
+app.listen( 4001 || process.env.PORT );
 
 //app.listen( 4001);
 
