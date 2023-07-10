@@ -15,7 +15,8 @@ import ViewsController from "./controller/views-controller.js";
 import AuthenticationController from "./controller/auth-controller.js";
 import NewsLikesController from "./controller/news-like-controller.js";
 import {PrivilegeController} from "./controller/privilege-controller.js";
-import WebSocket, { WebSocketServer as WSWebSocketServer } from 'ws';
+import { WebSocketServer } from 'ws';
+import http from 'http';
 
 dotenv.config()
 try {
@@ -57,9 +58,11 @@ console.log("Listining to web socket server port ", webSocketServerPort)
 const wsServer = new WebSocketServer.server({ httpServer: server,port: webSocketServerPort });*/
 
 const PORT =  process.env.PORT ;
-const wsServer1 =  WebSocket.Server || WSWebSocketServer;
-const wsServer = new wsServer1({ port: PORT })
-wsServer.on('connection', ws => {
+/*const wsServer1 =  WebSocket.Server || WSWebSocketServer;
+const wsServer = new wsServer1({ port: PORT })*/
+const server = http.createServer(app)
+const wss = new WebSocketServer({server})
+wss.on('connection', ws => {
     ws.on('message', message => {
         console.log(`Received message => ${message}`)
     })
@@ -189,8 +192,8 @@ NewsLikesController(app)
 PrivilegeController(app)
 
 
-app.listen( 4001 || process.env.PORT );
-
+//app.listen( 4001 || process.env.PORT );
+server.listen(PORT,function(){console.log("listening on port",PORT)})
 //app.listen( 4001);
 
 
