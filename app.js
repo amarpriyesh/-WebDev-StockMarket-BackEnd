@@ -15,7 +15,7 @@ import ViewsController from "./controller/views-controller.js";
 import AuthenticationController from "./controller/auth-controller.js";
 import NewsLikesController from "./controller/news-like-controller.js";
 import {PrivilegeController} from "./controller/privilege-controller.js";
-
+import WebSocket, { WebSocketServer as WSWebSocketServer } from 'ws';
 
 dotenv.config()
 try {
@@ -55,16 +55,18 @@ server.listen(webSocketServerPort)
 console.log("Listining to web socket server port ", webSocketServerPort)
 
 const wsServer = new WebSocketServer.server({ httpServer: server,port: webSocketServerPort });*/
-const WebSocket = require('ws')
+
 const PORT = process.env.PORT || 3000;
-const wsServer = new WebSocket.Server({ port: PORT })
-/*wss.on('connection', ws => {
+const wsServer1 =  WebSocket.Server || WSWebSocketServer;
+const wsServer = new wsServer1({ port: PORT })
+wsServer.on('connection', ws => {
     ws.on('message', message => {
         console.log(`Received message => ${message}`)
     })
     ws.send('Hello! Message From Server!!')
-})*/
+})
 
+/*
 const clients = new Map();
 
 wsServer.on('request', function (request) {
@@ -103,7 +105,7 @@ async function find() {
         setTimeout(() => {find()},60*1000 *20 )
         return
     }
-   /* const data = [{"description"
+   /!* const data = [{"description"
             :
             "Zomato NZ Media Private Limited is Zomato’s New Zealand-based wholly-owned subsidiary, whereas Zomato Australia Pty Limited is based out of Australia and is a step-down subsidiary, , zomato",
         "image"
@@ -131,7 +133,7 @@ async function find() {
             "sentiment_score": 0}]
     }
     ]
-*/
+*!/
     i = i+1
    const refinedData = data.data.map(obj => { const structuredData = {_id:obj.uuid,title:obj.title,description:obj.description,image:obj.image_url,source:obj.source,time:obj.published_at,symbol:obj.entities[0].symbol,company:obj.entities[0].name,industry:obj.entities[0].industry,sentiment:obj.entities[0].sentiment_score}
 
@@ -162,6 +164,7 @@ async function find() {
 
 find()
 
+*/
 
 
 
