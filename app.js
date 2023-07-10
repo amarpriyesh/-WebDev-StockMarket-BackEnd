@@ -45,13 +45,13 @@ app.use(
 
     })
 );
-const webSocketServerPort = 8000
+const webSocketServerPort = process.env.PORT || 8000;
 const server = https.createServer()
 server.listen(webSocketServerPort)
 
 
 
-console.log("Listining to web socket server port 8000")
+console.log("Listining to web socket server port ", webSocketServerPort)
 
 const wsServer = new WebSocketServer.server({httpServer: server});
 
