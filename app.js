@@ -1,7 +1,7 @@
 import express, {json} from 'express';
 import cors from 'cors'
 import WebSocketServer from 'websocket';
-import http  from 'http';
+import https  from 'https';
 import UserController from "./controller/users-controller.js";
 import NewsController from "./controller/news-controller.js";
 import NewsCommentsController from "./controller/news-comments-controller.js";
@@ -46,7 +46,7 @@ app.use(
     })
 );
 const webSocketServerPort = 8000
-const server = http.createServer()
+const server = https.createServer()
 server.listen(webSocketServerPort)
 
 
