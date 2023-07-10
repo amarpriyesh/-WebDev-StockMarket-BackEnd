@@ -35,7 +35,13 @@ app.use(
         secret: "asdfasdfasdfasdf",
         resave: false,
         saveUninitialized: true,
-        cookie: { maxAge: oneDay  }, // needs HTTPS
+                cookie: {
+                    secure: true,
+                    HttpOnly: false,
+                    sameSite: 'None',
+                    maxAge: 24 * 60 * 60 * 1000
+                }, // needs
+
 
     })
 );
