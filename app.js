@@ -34,7 +34,7 @@ app.use(
         secret: "asdfasdfasdfasdf",
         resave: false,
         saveUninitialized: true,
-        // cookie: { secure: true }, // needs HTTPS
+        cookie: { secure: true }, // needs HTTPS
     })
 );
 const webSocketServerPort = 8000
