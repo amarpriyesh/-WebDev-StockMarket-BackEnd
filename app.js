@@ -30,6 +30,7 @@ catch (e) {
 
 const app = express();
 const oneDay = 1000 * 60 * 60 * 24
+app.set('trust proxy', 1);
 app.use(
     session({
         secret: "asdfasdfasdfasdf",
@@ -37,7 +38,6 @@ app.use(
         saveUninitialized: true,
                 cookie: {
                     secure: true,
-                    HttpOnly: false,
                     sameSite: 'None',
                     maxAge: 24 * 60 * 60 * 1000
                 }, // needs
