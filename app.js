@@ -35,7 +35,7 @@ app.use(
         secret: "asdfasdfasdfasdf",
         resave: false,
         saveUninitialized: true,
-        cookie: { secure: true,maxAge: oneDay  }, // needs HTTPS
+        cookie: { maxAge: oneDay  }, // needs HTTPS
 
     })
 );
@@ -154,7 +154,7 @@ app.use(
     cors({
         credentials: true,
         //origin: "http://localhost:3000",
-           origin: "https://phenomenal-granita-444296.netlify.app",
+           origin: ["https://phenomenal-granita-444296.netlify.app","http://localhost:3000"],
     })
 );
 app.use(express.json());
