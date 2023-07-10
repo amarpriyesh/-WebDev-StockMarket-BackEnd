@@ -29,12 +29,14 @@ catch (e) {
 
 
 const app = express();
+const oneDay = 1000 * 60 * 60 * 24
 app.use(
     session({
         secret: "asdfasdfasdfasdf",
         resave: false,
         saveUninitialized: true,
-        cookie: { secure: true }, // needs HTTPS
+        cookie: { secure: true,maxAge: oneDay  }, // needs HTTPS
+
     })
 );
 const webSocketServerPort = 8000
