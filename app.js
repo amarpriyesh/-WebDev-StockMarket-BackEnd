@@ -1,3 +1,4 @@
+'use strict';
 import express, {json} from 'express';
 import cors from 'cors'
 import WebSocketServer from 'websocket';
@@ -53,7 +54,7 @@ server.listen(webSocketServerPort)
 
 console.log("Listining to web socket server port ", webSocketServerPort)
 
-const wsServer = new WebSocketServer.server({httpServer: server});
+const wsServer = new WebSocketServer.server({ port: webSocketServerPort });
 
 const clients = new Map();
 
@@ -176,8 +177,8 @@ NewsLikesController(app)
 PrivilegeController(app)
 
 
-//app.listen(process.env.PORT || 4000);
+app.listen(process.env.PORT || 4000);
 
-app.listen(4000);
+
 
 
