@@ -2,7 +2,7 @@
 import express, {json} from 'express';
 import cors from 'cors'
 import WebSocketServer from 'websocket';
-import https  from 'https';
+import http  from 'http';
 import UserController from "./controller/users-controller.js";
 import NewsController from "./controller/news-controller.js";
 import NewsCommentsController from "./controller/news-comments-controller.js";
@@ -47,14 +47,14 @@ app.use(
     })
 );
 const webSocketServerPort = process.env.PORT || 8000;
-const server = https.createServer()
+const server = http.createServer()
 server.listen(webSocketServerPort)
 
 
 
 console.log("Listining to web socket server port ", webSocketServerPort)
 
-const wsServer = new WebSocketServer.server({ port: webSocketServerPort });
+const wsServer = new WebSocketServer.server({ httpServer: server,port: webSocketServerPort });
 
 const clients = new Map();
 
