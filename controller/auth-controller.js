@@ -62,9 +62,9 @@ const AuthenticationController = (app) => {
 
             if (match && allowSignInVal) {
                 user.password = bcrypt.hash(password, saltRounds);
-                req.session['currentUser'] = user;
+                req.session["currentUser"] = user;
                 console.log("logged in User",user)
-                console.log("Session",req.session['currentUser'])
+                console.log("Session",req.session["currentUser"])
                 res.json(user);
             } else {
                 return  res.sendStatus(403);

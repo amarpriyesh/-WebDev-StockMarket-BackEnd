@@ -14,7 +14,6 @@ const ViewsController = (app) => {
 
         console.log("reaching here in views")
         const data = await ViewsDao.findAllViews()
-        console.log(data)
         res.json(data);
         //res.json(views);
     };
