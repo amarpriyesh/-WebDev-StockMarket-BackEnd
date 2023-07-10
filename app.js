@@ -1,8 +1,8 @@
 'use strict';
 import express, {json} from 'express';
 import cors from 'cors'
-import WebSocketServer from 'websocket';
-import http  from 'http';
+/*import WebSocketServer from 'websocket';
+import http  from 'http';*/
 import UserController from "./controller/users-controller.js";
 import NewsController from "./controller/news-controller.js";
 import NewsCommentsController from "./controller/news-comments-controller.js";
@@ -46,7 +46,7 @@ app.use(
 
     })
 );
-const webSocketServerPort = process.env.PORT || 8000;
+/*const webSocketServerPort = process.env.PORT || 8000;
 const server = http.createServer()
 server.listen(webSocketServerPort)
 
@@ -54,7 +54,16 @@ server.listen(webSocketServerPort)
 
 console.log("Listining to web socket server port ", webSocketServerPort)
 
-const wsServer = new WebSocketServer.server({ httpServer: server,port: webSocketServerPort });
+const wsServer = new WebSocketServer.server({ httpServer: server,port: webSocketServerPort });*/
+const WebSocket = require('ws')
+const PORT = process.env.PORT || 3000;
+const wsServer = new WebSocket.Server({ port: PORT })
+/*wss.on('connection', ws => {
+    ws.on('message', message => {
+        console.log(`Received message => ${message}`)
+    })
+    ws.send('Hello! Message From Server!!')
+})*/
 
 const clients = new Map();
 
