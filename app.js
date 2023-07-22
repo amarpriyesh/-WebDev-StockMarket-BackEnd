@@ -176,7 +176,7 @@ app.use(
     cors({
         credentials: true,
         //origin: "http://localhost:3000",
-           origin: ["https://phenomenal-granita-444296.netlify.app","http://localhost:3000"],
+           origin: ["https://phenomenal-granita-444296.netlify.app","http://localhost:3000","https://stockmarket.netlify.app"],
     })
 );
 app.use(express.json());
