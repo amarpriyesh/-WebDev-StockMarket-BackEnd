@@ -9,7 +9,6 @@ const NewsController = (app) => {
     let currentUser = null;
 
     const findAllNews = async (req, res) => {
-        console.log(req.query)
         let data
         let curentPage = 1
         if(req.query.page != null && req.query.pattern == null ){
@@ -22,7 +21,7 @@ const NewsController = (app) => {
             curentPage=req.query.page
         }
 
-        console.log(curentPage)
+
         const pageLength = 5
 
         const totalPage = Math.ceil(data.length/pageLength)
@@ -44,7 +43,6 @@ const NewsController = (app) => {
 
     const findNewsByID = async (req, res) => {
         const data = await NewsDao.findNewsById(req.params.id)
-        console.log(data)
         res.json(data);
     };
 

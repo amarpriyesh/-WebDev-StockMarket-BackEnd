@@ -18,6 +18,7 @@ import {PrivilegeController} from "./controller/privilege-controller.js";
 import { WebSocketServer } from 'ws';
 import http from 'http';
 
+
 dotenv.config()
 try {
     console.log("Pass",process.env.TUITER_PASSWORD)
@@ -39,14 +40,16 @@ app.use(
         resave: false,
         saveUninitialized: true,
                 cookie: {
-                    secure: true,
-                    sameSite: 'None',
+                    secure: false,
+                    sameSite: 'Lax',
                     maxAge: 24 * 60 * 60 * 1000
                 }, // needs
 
 
     })
 );
+
+
 /*const webSocketServerPort = process.env.PORT || 8000;
 const server = http.createServer()
 server.listen(webSocketServerPort)
@@ -64,6 +67,7 @@ const server = http.createServer(app)
 const wss = new WebSocketServer({server})
 wss.on('connection', ws => {
     ws.on('message', message => {
+
         console.log(`Received message => ${message}`)
     })
     ws.send('Hello! Message From Server!!')

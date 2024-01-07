@@ -8,7 +8,6 @@ const NewsCommentsController = (app) =>{
 
         console.log("NEWS COMMENT",req.body)
         const newNewsComment = await newsCommentsDao.createNewsComments({...req.body, date:Date.now()
-
         });
         console.log(newNewsComment)
         res.json(newNewsComment);
@@ -25,7 +24,7 @@ const NewsCommentsController = (app) =>{
     }
     const findNewsByUser = async (req,res) => {
         const allNews = await newsCommentsDao.findNewsCommentsByUser(req.params.userID);
-        console.log("Printing all COMMENTS",allNews)
+
         res.json(allNews)
     }
 

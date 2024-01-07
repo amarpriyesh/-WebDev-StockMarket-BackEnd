@@ -1,10 +1,31 @@
 import NewsModel from "../models/news-model.js";
+import client from "../redisClient.js"
+
+
+
+
+
+
 
 export const findAllNews = async () => {
-    const news = await NewsModel.find().sort({time: 'desc'});
-    return news;
-};
 
+    async function fetchNewsFromDB() {
+        const fetchedNews = await NewsModel.find().sort({ time: 'desc' });
+        return fetchedNews;
+    }
+    let news = ""
+    news = await  client.get('news').catch(a => console.log(a))
+    if (news) {
+        console.log("from memory")
+        return JSON.parse(news)
+    }
+    else {
+        console.log("from database")
+        news = await fetchNewsFromDB();
+       await client.set('news', JSON.stringify(news), 'EX', 3600)
+    }
+   return news
+};
 export const findNewsById = async (id) => {
     const news = await NewsModel.findById(id);
     return news;
