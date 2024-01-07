@@ -2,9 +2,23 @@ import NewsModel from "../models/news-model.js";
 import client from "../redisClient.js"
 
 
+export const allNewsCacheUpdate = async () => {
+    async function fetchNewsFromDB() {
+        const fetchedNews = await NewsModel.find().sort({ time: 'desc' });
+        return fetchedNews;
+    }
+    console.log("Reaching here")
+   const news = await fetchNewsFromDB();
+    if(news) {
+        await client.setEx('news', 3 * 3600, JSON.stringify(news))
+        console.log("Cache updated successfully")
+    }
+    else {
+        console.log("Error fetching news to update cache")
+    }
 
 
-
+}
 
 
 export const findAllNews = async () => {
@@ -22,7 +36,7 @@ export const findAllNews = async () => {
     else {
         console.log("from database")
         news = await fetchNewsFromDB();
-       await client.set('news', JSON.stringify(news), 'EX', 3600)
+       await client.setEx('news', 3 * 3600, JSON.stringify(news))
     }
    return news
 };
